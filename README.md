@@ -71,3 +71,93 @@ Kubernetes addresses each limitation through a **Cluster Architecture** (Master 
 > **Quote from Transcript:** *"Kubernetes is the future of DevOps... if you want to do a marathon journey in DevOps, Kubernetes is the future."*
 
 day 2 
+-------------------------------------------------------------------------------------------------
+☸️ Kubernetes Architecture — Simple Notes
+Big Picture: Control Plane vs Data Plane
+
+Think of Kubernetes as a company.
+
+🧠 Control Plane (Master Node)
+
+The brain of Kubernetes. It makes decisions and manages the entire cluster.
+
+💪 Data Plane (Worker Nodes)
+
+The workers that actually run your applications (pods).
+
+Worker Node (Data Plane)
+
+Every worker node needs 3 main components:
+
+Component	What it Does	Easy Way to Remember
+Kubelet	Watches pods and makes sure they are running. If a pod crashes, it reports and restarts it.	👷 Site Foreman
+Kube Proxy	Handles networking and load balancing between pods.	🚦 Traffic Police
+Container Runtime	Actually runs containers. Examples: containerd, CRI-O, Docker.	🚗 Engine
+Quick Memory Trick
+
+Kubelet → Watches Pods
+Kube Proxy → Handles Traffic
+Container Runtime → Runs Containers
+
+Control Plane (Master Node)
+
+This is where all cluster decisions happen.
+
+Component	What it Does	Easy Way to Remember
+API Server	Entry point of Kubernetes. Receives all requests and commands.	🛎 Receptionist
+Scheduler	Decides which worker node should run a pod.	📋 Manager
+etcd	Stores all cluster information and configuration.	🗄 Filing Cabinet
+Controller Manager	Ensures desired state is maintained.	👀 Supervisor
+Cloud Controller Manager (CCM)	Connects Kubernetes with AWS, Azure, GCP, etc.	🌐 Translator
+How Everything Works Together
+Example: Creating a Pod
+
+1️⃣ User sends request → API Server
+
+2️⃣ Scheduler selects the best worker node
+
+3️⃣ Controller Manager checks if desired state is maintained
+
+4️⃣ Kubelet on the selected worker node receives instructions
+
+5️⃣ Container Runtime starts the container
+
+6️⃣ Kube Proxy gives networking and traffic access
+
+Why Kubernetes is Powerful
+Auto-Healing
+
+If a pod crashes:
+
+Kubelet detects it
+Controller Manager notices desired state is broken
+New pod gets created automatically
+Auto-Scaling
+
+Kubernetes can increase or decrease pods based on load.
+
+Load Balancing
+
+Kube Proxy distributes incoming traffic across multiple pods.
+
+Super Short Interview Revision
+Worker Node Components
+Kubelet → Manages pods
+Kube Proxy → Networking & Load Balancing
+Container Runtime → Runs containers
+Control Plane Components
+API Server → Entry point
+Scheduler → Chooses node
+etcd → Stores cluster data
+Controller Manager → Maintains desired state
+CCM → Cloud integration
+Fun Fact 🎉
+
+K8s = Kubernetes
+
+The "8" represents the 8 letters between K and S.
+
+K + (ubernete) + S = K8s
+
+One-Line Summary
+API Server receives requests → Scheduler picks node → Controller Manager ensures desired state → Kubelet starts pod via Container Runtime → Kube Proxy handles traffic. 🚀
