@@ -69,3 +69,5 @@ Kubernetes addresses each limitation through a **Cluster Architecture** (Master 
     *   Pods, Deployments, Services, and Ingress Controllers.
 
 > **Quote from Transcript:** *"Kubernetes is the future of DevOps... if you want to do a marathon journey in DevOps, Kubernetes is the future."*
+
+day 2 
