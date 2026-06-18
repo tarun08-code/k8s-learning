@@ -161,3 +161,95 @@ K + (ubernete) + S = K8s
 
 One-Line Summary
 API Server receives requests → Scheduler picks node → Controller Manager ensures desired state → Kubelet starts pod via Container Runtime → Kube Proxy handles traffic. 🚀
+
+day 3 
+
+insatall minikube 
+
+day 4 / day 32
+--------------------------------------------------------------------------------------------
+
+### Local vs Production Kubernetes
+
+**For Learning/Development:**
+
+* Minikube
+* k3s
+* kind
+* MicroK8s
+
+❌ Not production-ready because they lack HA, scalability, and enterprise support.
+
+---
+
+### Production Kubernetes Options
+
+* Vanilla Kubernetes
+* OpenShift
+* Rancher
+* VMware Tanzu
+* Amazon EKS
+* Azure AKS
+* Google GKE
+
+**Managed Services (EKS, AKS, GKE):**
+
+* Cloud provider manages control plane
+* Easier maintenance and support
+
+**Self-Managed:**
+
+* Team manages everything
+* More control, lower cost
+
+---
+
+### kops (Kubernetes Operations)
+
+A tool used to:
+
+* Create clusters
+* Upgrade clusters
+* Configure clusters
+* Delete clusters
+
+Commonly used for managing self-managed Kubernetes clusters on AWS.
+
+---
+
+### kops Cluster Setup Steps
+
+1. Install:
+
+   * Python 3
+   * AWS CLI
+   * kubectl
+   * kops
+
+2. Configure AWS IAM permissions:
+
+   * EC2
+   * S3
+   * IAM
+   * VPC
+
+3. Create an S3 bucket to store cluster state.
+
+4. Configure domain:
+
+   * Production → Route 53 + custom domain
+   * Testing → `.k8s.local`
+
+5. Create cluster using `kops create cluster`.
+
+---
+
+### Quick Revision
+
+✅ Local: Minikube, k3s, kind, MicroK8s
+✅ Production: OpenShift, Rancher, Tanzu, EKS, AKS, GKE
+✅ kops = Kubernetes cluster lifecycle management on AWS
+✅ S3 stores cluster state
+✅ Route 53 manages DNS
+✅ Managed = Cloud handles control plane
+✅ Self-managed = Team handles everything 🚀
