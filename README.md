@@ -253,3 +253,46 @@ Commonly used for managing self-managed Kubernetes clusters on AWS.
 ✅ Route 53 manages DNS
 ✅ Managed = Cloud handles control plane
 ✅ Self-managed = Team handles everything 🚀
+
+
+day 5 / 33
+--------------------------------------------------------------------------------------------
+
+Day 33 — First App Deployment in K8s
+Pod = smallest unit in K8s
+
+Wrapper around container(s). You deploy Pods, not containers directly.
+Gets a Cluster IP. Usually 1 container per pod (multi-container = sidecar/init pattern).
+
+Tools:
+
+kubectl → CLI to talk to cluster
+minikube → local single-node cluster for learning
+
+pod.yaml structure:
+
+yamlapiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+
+Key commands:
+
+bashkubectl create -f pod.yaml
+kubectl get pods / kubectl get pods -o wide
+kubectl describe pod <name>   # debug
+kubectl logs <name>            # app logs
+kubectl delete pod <name>
+minikube ssh → curl <pod-ip>  # access app
+
+Limitation: Plain pods have no auto-healing or auto-scaling → use Deployments instead (next topic).
+
+day 6 / 34
+------------------------------------------------------------------------------------------
+
