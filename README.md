@@ -295,7 +295,38 @@ Limitation: Plain pods have no auto-healing or auto-scaling → use Deployments 
 
 day 6 / 34
 ------------------------------------------------------------------------------------------
+Hierarchy:
+Deployment → ReplicaSet → Pod → Container
+Container vs Pod vs Deployment:
 
-streakk commit day 6 
+Container → runtime instance (docker run)
+Pod → K8s wrapper around container, defined in YAML
+Deployment → manages pods via ReplicaSet, adds auto-heal + auto-scale
 
-streak commit 7 
+Why not just Pods?
+
+If you delete a pod → it stays deleted. No recovery.
+Deployment fixes this → ReplicaSet watches desired state and recreates pods instantly.
+
+deployment.yaml key fields:
+yamlkind: Deployment
+spec:
+  replicas: 3
+  selector: ...
+  template: ... # pod definition goes here
+Key behaviors:
+
+Set replicas: 3 → always 3 pods running
+Delete a pod → ReplicaSet auto-creates a replacement
+Update replicas in YAML → scales up/down instantly
+
+Rule: Never create bare Pods in production. Always use Deployments.
+Interview answers:
+
+Pod vs Deployment → Pod has no self-healing; Deployment does via ReplicaSet
+Deployment vs ReplicaSet → Deployment handles lifecycle (updates, rollbacks); ReplicaSet just maintains pod count
+
+
+
+
+
