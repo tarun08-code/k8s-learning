@@ -326,7 +326,83 @@ Interview answers:
 Pod vs Deployment → Pod has no self-healing; Deployment does via ReplicaSet
 Deployment vs ReplicaSet → Deployment handles lifecycle (updates, rollbacks); ReplicaSet just maintains pod count
 
+day 7/ 35 
+--------------------------------------------------------------------------------------------
+Hierarchy:
+Deployment → ReplicaSet → Pod → Container
+Container vs Pod vs Deployment:
 
+Container → runtime instance (docker run)
+Pod → K8s wrapper around container, defined in YAML
+Deployment → manages pods via ReplicaSet, adds auto-heal + auto-scale
+
+Why not just Pods?
+
+If you delete a pod → it stays deleted. No recovery.
+Deployment fixes this → ReplicaSet watches desired state and recreates pods instantly.
+
+deployment.yaml key fields:
+yamlkind: Deployment
+spec:
+  replicas: 3
+  selector: ...
+  template: ... # pod definition goes here
+Key behaviors:
+
+Set replicas: 3 → always 3 pods running
+Delete a pod → ReplicaSet auto-creates a replacement
+Update replicas in YAML → scales up/down instantly
+
+Rule: Never create bare Pods in production. Always use Deployments.
+Interview answers:
+
+Pod vs Deployment → Pod has no self-healing; Deployment does via ReplicaSet
+Deployment vs ReplicaSet → Deployment handles lifecycle (updates, rollbacks); ReplicaSet just maintains pod count
+
+
+Handwritten Notes
+Day 34 — Deployments
+Hierarchy: Deployment → ReplicaSet → Pod
+
+Pod alone = no auto-heal (deleted = gone)
+Deployment = auto-heal + auto-scale via ReplicaSet
+ReplicaSet maintains desired pod count always
+
+Never create bare pods in prod → always use Deployment
+Interview:
+
+Pod vs Deployment → healing/scaling
+Deployment vs RS → lifecycle vs count
+
+Here is a summary of the video transcript regarding Kubernetes Services, based on Abhishek's Day 35 DevOps course lecture.
+
+The Core Problem: Why Do We Need Services?
+In a production environment, we deploy Deployments (which manage ReplicaSets and Pods) rather than individual Pods. However, Pods pasted20:33Claude responded: Here are both:Here are both:
+
+GitHub Notes
+Day 35 — Kubernetes Services
+Why Services?
+
+Pods are ephemeral — they die and get new IPs. Clients can't hardcode pod IPs. Service = stable abstraction on top of pods.
+3 Key Benefits:
+
+Load Balancing → spreads traffic across all pod replicas via kube-proxy
+Service Discovery → uses Labels & Selectors, not IPs. Pod dies → new pod gets same label → Service auto-detects it
+Exposure Control → control who can access your app via Service type
+
+Service Types:
+TypeAccessUse CaseClusterIP (default)Inside cluster onlyMicroservice-to-microserviceNodePortNode IP + port (30000–32767)Internal testing/devLoadBalancerPublic IP via cloud providerProduction, internet-facing
+How Labels & Selectors work:
+yaml# Deployment labels its pods
+labels:
+  app: payment
+
+# Service selects those pods
+selector:
+  app: payment
+Traffic flow:
+
+Client → Service (stable DNS) → kube-proxy → healthy Pod
 
 
 
