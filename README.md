@@ -404,5 +404,8 @@ Traffic flow:
 
 Client → Service (stable DNS) → kube-proxy → healthy Pod
 
+day 8 / 36 
+ KUBERNETES INTERVIEW QUESTIONS PART-1| What's Your Score ? |10/10|
 
+ 
 
