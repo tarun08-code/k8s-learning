@@ -407,7 +407,59 @@ Client → Service (stable DNS) → kube-proxy → healthy Pod
 day 8 / 36 
  KUBERNETES INTERVIEW QUESTIONS PART-1| What's Your Score ? |10/10|
 
- day streak
+ Day 36 — Mock Interview Q&A
+Q1. Docker vs K8s?
 
- streak ahag\\\in 
+Docker = container platform, single node
+K8s = container orchestration, multi-node cluster, auto-heal + auto-scale
+
+Q2. Architecture components?
+
+Control Plane: API Server, Scheduler, etcd, Controller Manager, CCM
+Worker Node: Kubelet, Kube-proxy, Container Runtime
+
+Q3. Docker Swarm vs K8s?
+
+Swarm = simple, small-scale
+K8s = complex, enterprise-grade, CNCF ecosystem, CRDs
+
+Q4. Container vs Pod?
+
+Container = single runtime instance
+Pod = wrapper around 1+ containers, shared IP + storage, talk via localhost
+
+Q5. Namespace?
+
+Logical isolation within a cluster
+Multiple teams share one cluster, resources stay separate
+Used with RBAC + Network Policies
+
+Q6. Kube-proxy role?
+
+Manages iptables/IPVS rules on each node
+Routes traffic from Service → correct Pod
+
+Q7. Service types?
+
+ClusterIP → internal only (default)
+NodePort → node IP + port, outside cluster
+LoadBalancer → public IP via cloud provider
+
+Q8. NodePort vs LoadBalancer?
+
+NodePort = manual node IP management
+LoadBalancer = cloud auto-provisions public IP, more scalable
+
+Q9. Kubelet role?
+
+Node agent, manages pod lifecycle
+Reports pod health to API Server
+Failure detected → triggers ReplicaSet to recreate pod
+
+Q10. DevOps day-to-day in K8s?
+
+Cluster upgrades & patches
+Deploy + troubleshoot pods/services
+Monitoring & alerts
+SME support for teams
 
