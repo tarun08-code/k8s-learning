@@ -463,3 +463,5 @@ Deploy + troubleshoot pods/services
 Monitoring & alerts
 SME support for teams
 
+day 9 streak 
+git commit 
